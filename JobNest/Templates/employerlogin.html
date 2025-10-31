@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobNest - Employer Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* This custom style ensures a consistent font across the whole page */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 antialiased font-sans">
+    <section class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="bg-gray-800 p-8 sm:p-10 rounded-2xl shadow-xl max-w-md w-full border border-gray-700">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-blue-500 mb-2">Employer Login</h2>
+                <p class="text-gray-400 mb-8">Access your company dashboard and manage your hires.</p>
+            </div>
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+                <div class="form-group">
+                    <label for="username" class="block text-gray-300 font-semibold mb-2">FullName</label>
+                    <input type="text" id="username" name="username" placeholder="FullName" required class="w-full p-3 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="block text-gray-300 font-semibold mb-2">Password</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required class="w-full p-3 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+                </div>
+                <div class="text-right">
+                    <a href="#" class="text-sm font-medium text-blue-400 hover:text-blue-300 transition duration-300">Forgot Password?</a>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-blue-700 transition duration-300 transform hover:-translate-y-1">Log In</button>
+            </form>
+            <div class="text-center mt-6">
+                <p class="text-gray-400">Don't have an account? <a href="{% url "employerregister" %}" class="text-blue-400 hover:text-blue-300 font-semibold transition duration-300">Register your company</a></p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

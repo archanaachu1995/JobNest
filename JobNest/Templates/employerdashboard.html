@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobNest - Employer Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-gray-200 antialiased">
+
+    <header class="bg-gray-800 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex justify-between items-center py-5">
+                <a href="#" class="text-3xl font-bold text-blue-500">JobNest</a>
+                <ul class="hidden md:flex space-x-8 items-center">
+                    <li><a href="#" class="text-gray-300 hover:text-blue-500 transition duration-300 font-medium">Dashboard</a></li>
+                     <li><a href="{% url 'employer_profile' employer.id %}" class="text-gray-300 hover:text-blue-500 transition duration-300 font-medium">Company Profile</a></li>
+                    <li><a href="{% url 'Logout' %}" class="btn bg-gray-700 text-blue-400 border border-blue-400 hover:bg-blue-500 hover:text-white transition duration-300 px-6 py-2 rounded-lg font-semibold">Log Out</a></li>
+                </ul>
+                <div class="md:hidden text-2xl text-gray-400 cursor-pointer">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+            <h2 class="text-4xl font-extrabold text-white mb-4 md:mb-0">Welcome, {{user.username}} 👋</h2>
+            <a href="{% url 'Jobpost' employer.id %}" class="btn bg-blue-600 text-white hover:bg-blue-700 transition duration-300 px-6 py-3 rounded-lg font-semibold shadow-lg">
+                <i class="fas fa-plus-circle mr-2"></i> Post a New Job
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            <div class="bg-gray-800 p-6 rounded-xl shadow-lg transform transition duration-300 hover:scale-105">
+                <h4 class="text-lg text-gray-400 font-medium mb-2">Active Job Postings</h4>
+                <p class="text-4xl font-bold text-white">{{job_count}}</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-xl shadow-lg transform transition duration-300 hover:scale-105">
+                <h4 class="text-lg text-gray-400 font-medium mb-2">Total Applicants</h4>
+                <p class="text-4xl font-bold text-white">{{applicants_count}}</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-xl shadow-lg transform transition duration-300 hover:scale-105">
+                <h4 class="text-lg text-gray-400 font-medium mb-2">New Applications Today</h4>
+                <p class="text-4xl font-bold text-white">{{applicants_count}}</p>
+            </div>
+            
+        </div>
+
+        <div class="bg-gray-800 p-6 md:p-8 rounded-xl shadow-lg mb-10">
+            <div class="flex justify-between items-center border-b border-gray-700 pb-4 mb-6">
+                <h3 class="text-2xl md:text-3xl font-bold text-blue-500">Your Job Listings</h3>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-700">
+                    <thead class="bg-gray-700">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Job Title</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Type</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Location</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Vacancies</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Status</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Salary</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Posted On</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-gray-800 divide-y divide-gray-700">
+                        {% for job in jobs %}
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100">{{ job.title }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ job.get_job_type_display }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ job.location }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ job.vacancies }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                {% if job.is_active %}
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-900 text-green-300">Active</span>
+                                {% else %}
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-red-900 text-red-300">Closed</span>
+                                {% endif %}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                                {% if job.salary %}
+                                    ${{ job.salary }}
+                                {% else %}
+                                    Not specified
+                                {% endif %}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ job.posted_at|date:"M d, Y" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="7" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">No jobs posted yet.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 p-6 md:p-8 rounded-xl shadow-lg">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-700 pb-4 mb-6">
+                <h3 class="text-2xl md:text-3xl font-bold text-blue-500 mb-4 md:mb-0">Recent Applicants</h3>
+                <a href="#" class="btn bg-gray-700 text-blue-400 border border-blue-400 hover:bg-blue-500 hover:text-white transition duration-300 px-6 py-3 rounded-lg font-semibold">
+                    View All Applicants
+                </a>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-700">
+                    <thead class="bg-gray-700">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Candidate</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Applied For</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Date Applied</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-gray-800 divide-y divide-gray-700">
+                        {% for app in recent_applicants %}
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-blue-400 hover:underline">{{ app.candidate.username }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ app.job.title }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ app.applied_at|date:"M d, Y" }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                {% if app.status == "pending" %}
+                                    <a href="{% url 'ApproveApplication' app.id %}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mr-2">Approve</a>
+                                    <a href="{% url 'RejectApplication' app.id %}" class="inline-flex items-center px-4 py-2 border border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-300 bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Reject</a>
+                                {% elif app.status == "approved" %}
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-900 text-green-300">Approved</span>
+                                {% elif app.status == "rejected" %}
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-red-900 text-red-300">Rejected</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">No applicants yet.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-950 text-white py-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-500 text-sm">&copy; 2025 JobNest. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

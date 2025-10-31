@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job - JobNest</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .job-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-color: var(--light-gray);
+        }
+
+        .job-card {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .job-card h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #2563eb;
+        }
+
+        .job-card p {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #6b7280;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn {
+            display: block;
+            background-color: #2563eb;
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #1e40af;
+        }
+    </style>
+</head>
+<body>
+    <section class="job-section">
+        <div class="job-card">
+            <h2>Post a Job</h2>
+            <p>Fill in the details below to publish a new job opening.</p>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="title">Job Title</label>
+                    <input type="text" id="title" name="title" placeholder="e.g., Software Engineer" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Job Description</label>
+                    <textarea id="description" name="description" placeholder="Describe the responsibilities and requirements..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" placeholder="e.g., New York, Remote" required>
+                </div>
+                <div class="form-group">
+        <label for="vacancies">Number of Vacancies</label>
+        <input type="number" id="vacancies" name="vacancies" min="1" placeholder="e.g., 5" required>
+    </div>
+
+                <div class="form-group">
+                    <label for="job_type">Job Type</label>
+                    <select id="job_type" name="job_type" required>
+                        <option value="">-- Select Job Type --</option>
+                        <option value="full-time">Full Time</option>
+                        <option value="part-time">Part Time</option>
+                        <option value="contract">Contract</option>
+                        <option value="internship">Internship</option>
+                        <option value="remote">Remote</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="salary">Salary (Optional)</label>
+                    <input type="number" id="salary" name="salary" step="0.01" placeholder="e.g., 60000">
+                </div>
+
+                
+
+                <button type="submit" class="btn">Post Job</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

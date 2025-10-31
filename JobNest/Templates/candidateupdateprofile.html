@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobNest - Edit Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-gray-200 antialiased font-sans">
+    <header class="bg-gray-800 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex justify-between items-center py-5">
+                <a href="#" class="text-3xl font-bold text-blue-500">JobNest</a>
+                <ul class="hidden md:flex space-x-8 items-center">
+                    <li><a href="#" class="text-gray-300 hover:text-blue-500 transition duration-300 font-medium">Dashboard</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-blue-500 transition duration-300 font-medium">Jobs</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-blue-500 transition duration-300 font-medium">Profile</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-blue-500 transition duration-300 font-medium">Settings</a></li>
+                    <li><a href="#" class="btn bg-gray-700 text-blue-400 border border-blue-400 hover:bg-blue-500 hover:text-white transition duration-300 px-6 py-2 rounded-lg font-semibold">Log Out</a></li>
+                </ul>
+                <button class="md:hidden text-gray-400 text-2xl cursor-pointer">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <form method="post" class="space-y-6 md:space-y-8">
+            {% csrf_token %}
+            {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+            <div class="bg-gray-800 p-6 md:p-10 rounded-xl shadow-lg border border-gray-700">
+                <div class="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-10 mb-6 md:mb-8">
+                    <div class="flex-shrink-0 w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-blue-500">
+                        <img src="{{ candidate.image.url }}" alt="Profile Picture" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-grow text-center md:text-left">
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-1">{{user.username}}</h2>
+                        <p class="text-lg text-gray-400">Web Developer</p>
+                    </div>
+                    <div class="flex-shrink-0 flex space-x-4">
+                        <button type="submit" class="btn bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 transform hover:-translate-y-1">Save Profile</button>
+                        <a href="#" class="btn bg-transparent text-blue-400 border border-blue-400 px-6 py-3 rounded-lg font-semibold hover:bg-blue-500 hover:text-white transition duration-300">Cancel</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 p-6 md:p-10 rounded-xl shadow-lg border border-gray-700">
+                <h3 class="text-2xl font-bold text-blue-400 border-b-2 border-gray-700 pb-4 mb-6">Personal Information</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-group">
+                        <label for="full-name" class="block text-gray-300 font-semibold mb-2">Full Name</label>
+                        <input type="text" id="full-name" name="full-name" value="{{ user.username }}" required class="w-full p-3 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="block text-gray-300 font-semibold mb-2">Email Address</label>
+                        <input type="email" id="email" name="email" value="{{user.email}}" required class="w-full p-3 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+    
+    <div class="text-center mt-10">
+        <a href="{% url 'candidatedashboard' %}" class="inline-flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 text-sm rounded-lg font-semibold shadow-md hover:bg-blue-700 transition duration-300 transform hover:-translate-y-1">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to Dashboard</span>
+        </a>
+    </div>
+
+    <footer class="bg-gray-950 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-500 text-sm">&copy; 2025 JobNest. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

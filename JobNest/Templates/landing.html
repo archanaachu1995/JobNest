@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobNest - Find Your Dream Job</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 antialiased">
+
+    <header class="bg-gray-800 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex justify-between items-center py-5">
+                <a href="#" class="text-4xl font-extrabold text-blue-500">JobNest</a>
+                <ul class="hidden md:flex space-x-8 items-center">
+                    <li><a href="#features" class="text-gray-300 hover:text-blue-500 transition duration-300 font-medium">Features</a></li>
+                    <li><a href="#for-employers" class="text-gray-300 hover:text-blue-500 transition duration-300 font-medium">For Employers</a></li>
+                    <li><a href="{% url 'candidatelogin' %}" class="text-gray-300 hover:text-blue-500 transition duration-300 font-medium">Log In</a></li>
+                    <li><a href="#" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 shadow-md">Sign Up</a></li>
+                </ul>
+                <button class="md:hidden text-gray-400 hover:text-white focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="bg-gray-800 py-24 text-center">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight">Your Career Awaits. Find It Now.</h1>
+            <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-10">Connect with top companies and discover thousands of job opportunities tailored just for you. Take the next step in your professional journey with ease.</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="{% url 'candidatelogin' %}" class="btn bg-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition duration-300 shadow-xl">Find a Job</a>
+                <a href="{% url 'employerlogin' %}" class="btn border border-blue-500 text-blue-400 px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-500 hover:text-white transition duration-300">Post a Job</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20" id="features">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-white mb-12">Why Choose JobNest?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700">
+                    <div class="text-5xl text-blue-500 mb-4"><i class="fas fa-user-check"></i></div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Personalized Job Matching</h3>
+                    <p class="text-gray-400">Our intelligent system matches your skills and experience to the perfect job, saving you time and effort in your search.</p>
+                </div>
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700">
+                    <div class="text-5xl text-blue-500 mb-4"><i class="fas fa-file-alt"></i></div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Easy Application Process</h3>
+                    <p class="text-gray-400">Apply to jobs in minutes with a streamlined, user-friendly application form. No more endless paperwork.</p>
+                </div>
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700">
+                    <div class="text-5xl text-blue-500 mb-4"><i class="fas fa-handshake"></i></div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Connect with Employers</h3>
+                    <p class="text-gray-400">Communicate directly with hiring managers and get real-time updates on your application status.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gray-800 py-20" id="for-employers">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-white mb-12">For Employers</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-700">
+                    <div class="text-5xl text-blue-500 mb-4"><i class="fas fa-search"></i></div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Find Top Talent Fast</h3>
+                    <p class="text-gray-400">Access a curated database of qualified candidates. Our powerful search tools help you find the right fit for your team in no time.</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-700">
+                    <div class="text-5xl text-blue-500 mb-4"><i class="fas fa-bullhorn"></i></div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Simple Job Posting</h3>
+                    <p class="text-gray-400">Post job listings in minutes with our intuitive interface. Reach thousands of job seekers with a single click.</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-700">
+                    <div class="text-5xl text-blue-500 mb-4"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Track Your Applications</h3>
+                    <p class="text-gray-400">Manage all your applications from a single dashboard. Track candidate progress and communicate with them seamlessly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-blue-600 text-white py-20 text-center">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Ready to Start Your Career Journey?</h2>
+            <p class="text-xl md:text-2xl mb-8">Join thousands of job seekers and companies using JobNest today.</p>
+
+
+            <a href="{% url "candidateregister" %}" class="btn bg-white text-blue-600 px-10 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition duration-300 shadow-xl">Create Your Free Profile</a>
+        </div>
+    </section>
+
+    <footer class="bg-gray-950 text-white py-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <ul class="flex flex-wrap justify-center space-x-6 md:space-x-12 mb-6">
+                <li><a href="#" class="text-gray-400 hover:text-blue-500 transition duration-300">About Us</a></li>
+                <li><a href="#" class="text-gray-400 hover:text-blue-500 transition duration-300">Contact</a></li>
+                <li><a href="#" class="text-gray-400 hover:text-blue-500 transition duration-300">Privacy Policy</a></li>
+                <li><a href="#" class="text-gray-400 hover:text-blue-500 transition duration-300">Terms of Service</a></li>
+            </ul>
+            <p class="text-gray-500 text-sm">&copy; 2025 JobNest. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

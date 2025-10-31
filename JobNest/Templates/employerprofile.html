@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ employer.company_name }} - Company Profile | JobNest</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-gray-200 antialiased font-sans">
+
+<section class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="bg-gray-800 p-8 sm:p-10 rounded-2xl shadow-xl max-w-4xl w-full border border-gray-700">
+
+    <!-- Header -->
+    <div class="flex items-center space-x-6 border-b border-gray-700 pb-6 mb-6">
+      
+        <div class="w-20 h-20 rounded-xl bg-gray-700 flex items-center justify-center text-2xl font-bold text-blue-400">
+  {{ employer.company_name|slice:":2"|upper }}
+</div>
+      <div>
+        <h1 class="text-3xl font-extrabold text-blue-500">{{ employer.company_name }}</h1>
+        <p class="text-gray-400">Industry: {{ employer.industry }}</p>
+        {% if employer.website %}
+          
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- About Company -->
+    <div class="mb-8">
+      <h2 class="text-xl font-semibold text-blue-400 mb-3"><i class="fas fa-building mr-2"></i>About Us</h2>
+      <p class="text-gray-300 leading-relaxed">{{ employer.company_description }}</p>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="mb-8">
+      <h2 class="text-xl font-semibold text-blue-400 mb-3"><i class="fas fa-address-card mr-2"></i>Contact Info</h2>
+      <p><strong>Contact Person:</strong> {{ employer.username }}</p>
+      <p><strong>Email:</strong> {{ employer.email }}</p>
+      {% if employer.phone %}<p><strong>Phone:</strong> {{ employer.phone }}</p>{% endif %}
+    </div>
+
+    <!-- Job Openings -->
+    <div class="mb-8">
+      <h2 class="text-xl font-semibold text-blue-400 mb-3"><i class="fas fa-briefcase mr-2"></i>Open Positions</h2>
+      {% if jobs %}
+        <div class="grid md:grid-cols-2 gap-4">
+          {% for job in jobs %}
+          <div class="bg-gray-700 p-4 rounded-lg">
+            <h3 class="text-lg font-semibold text-white">{{ job.title }}</h3>
+            <p class="text-gray-400">{{ job.location }} | {{ job.job_type|title }}</p>
+            <p class="text-gray-300 mt-2">{{ job.description|truncatewords:20 }}</p>
+            <p class="text-gray-400 text-sm mt-1">Vacancies: {{ job.vacancies }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-gray-400">No active job postings yet.</p>
+      {% endif %}
+    </div>
+    <a href="{% url 'employerdashboard' employer.id %}" class="inline-flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 text-sm rounded-lg font-semibold shadow-md hover:bg-blue-700 transition duration-300 transform hover:-translate-y-1">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to Dashboard</span>
+        </a>
+
+  </div>
+</section>
+
+</body>
+</html>

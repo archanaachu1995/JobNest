@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobNest - Settings</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-gray-200 antialiased font-sans">
+
+    <header class="bg-gray-800 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex justify-between items-center py-5">
+                <a href="#" class="text-3xl font-bold text-blue-500">CareerConnect</a>
+                <ul class="hidden md:flex space-x-8 items-center">
+                    <li><a href="#" class="text-gray-300 hover:text-blue-500 transition duration-300 font-medium">Dashboard</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-blue-500 transition duration-300 font-medium">Jobs</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-blue-500 transition duration-300 font-medium">Profile</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-blue-500 transition duration-300 font-medium">Settings</a></li>
+                    <li><a href="#" class="btn bg-gray-700 text-blue-400 border border-blue-400 hover:bg-blue-500 hover:text-white transition duration-300 px-6 py-2 rounded-lg font-semibold">Log Out</a></li>
+                </ul>
+                <button class="md:hidden text-gray-400 text-2xl cursor-pointer">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
+            <aside class="col-span-1 bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 h-fit">
+                <h3 class="text-2xl font-bold text-blue-400 mb-4 pb-2 border-b border-gray-700">Settings</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 p-3 rounded-lg bg-blue-600 text-white font-semibold transition duration-300">
+                            <i class="fas fa-user-cog w-5 text-center"></i>
+                            <span>Account Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-400 hover:bg-gray-700 hover:text-blue-400 transition duration-300">
+                            <i class="fas fa-bell w-5 text-center"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <main class="col-span-1 md:col-span-3 bg-gray-800 p-6 md:p-10 rounded-xl shadow-lg border border-gray-700">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-6 md:mb-8 pb-4 border-b-2 border-gray-700">Account Settings</h2>
+
+                <div class="settings-section">
+                    <h3 class="text-2xl font-bold text-blue-400 mb-6">Change Password</h3>
+                    <form method="post" class="space-y-6">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="new-password" class="block text-gray-300 font-semibold mb-2">New Password</label>
+                            <input type="password" id="new-password" name="new-password" required class="w-full p-4 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="form-actions text-right">
+                            <button type="submit" class="btn bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 transform hover:-translate-y-1">Update Password</button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </section>
+    <div class="text-center mt-10">
+        <a href="{% url 'candidatedashboard' %}" class="inline-flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 text-sm rounded-lg font-semibold shadow-md hover:bg-blue-700 transition duration-300 transform hover:-translate-y-1">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to Dashboard</span>
+        </a>
+    </div>
+
+    <footer class="bg-gray-950 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-500 text-sm">&copy; 2025 JobNest. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
